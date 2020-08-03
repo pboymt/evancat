@@ -1,0 +1,21 @@
+{
+  "name": "evancat",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/pboymt/evancat.git",
+  "author": "Robert Lee <pboymt@foxmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "node lib"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "reflect-metadata": "^0.1.13",
+    "sqlite3": "^5.0.0",
+    "typeorm": "^0.2.25"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.7",
+    "@types/node": "^14.0.27"
+  }
+}
