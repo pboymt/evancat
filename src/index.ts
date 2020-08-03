@@ -8,6 +8,7 @@ app.all('/', (req, res) => {
 });
 
 app.post('/bot', (req, res) => {
+    console.log('收到消息');
     console.log(req.body);
     const dingRes: IDingTalkResponse = {
         msgtype: 'text',
