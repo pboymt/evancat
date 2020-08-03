@@ -25,6 +25,7 @@ app.all('/', (req, res) => {
 app.post('/bot', (req, res) => {
     console.log('收到消息');
     const header: IDingTalkRequestHeader = req.headers;
+    console.log(req.headers);
     console.log(req.body);
     if (verify_request(header.timestamp ?? '', header.sign ?? '')) {
         const dingRes: IDingTalkResponse = {
