@@ -6,7 +6,7 @@
   "author": "Robert Lee <pboymt@foxmail.com>",
   "license": "MIT",
   "scripts": {
-    "start": "node lib"
+    "start": "tsc & node lib"
   },
   "dependencies": {
     "express": "^4.17.1",

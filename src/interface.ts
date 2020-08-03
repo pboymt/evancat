@@ -1,3 +1,5 @@
+import { IncomingHttpHeaders } from "http";
+
 export type IDingTalkResponse = IDingTalkResponseMarkdown | IDingTalkResponseText;
 
 interface IDingTalkResponseText {
@@ -24,4 +26,15 @@ interface IDingTalkResponseMarkdownContent {
 interface IDingTalkResponseAt {
     atMobiles: string[];
     isAtAll: boolean;
+}
+
+export interface IConfig {
+    agent_id: string;
+    app_key: string;
+    app_secret: string;
+}
+
+export interface IDingTalkRequestHeader extends IncomingHttpHeaders {
+    timestamp?: string;
+    sign?: string;
 }
