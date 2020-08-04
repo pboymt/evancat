@@ -6,9 +6,10 @@
   "author": "Robert Lee <pboymt@foxmail.com>",
   "license": "MIT",
   "scripts": {
-    "start": "tsc & node lib"
+    "start": "node lib"
   },
   "dependencies": {
+    "axios": "^0.19.2",
     "express": "^4.17.1",
     "reflect-metadata": "^0.1.13",
     "sqlite3": "^5.0.0",
