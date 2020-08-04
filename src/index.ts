@@ -3,6 +3,7 @@ import { IDingTalkResponse, IConfig, IDingTalkRequestHeader } from './interface'
 import { readFileSync, existsSync } from "fs";
 import { join } from "path";
 import { verify_service_factory } from './auth';
+import { switch_response } from './response';
 
 const config_path = join(__dirname, '../config.json');
 if (!existsSync(config_path)) {
@@ -22,22 +23,13 @@ app.all('/', (req, res) => {
     res.send('Hello bot');
 });
 
-app.post('/bot', (req, res) => {
+app.post('/bot', async (req, res) => {
     console.log('收到消息');
     const header: IDingTalkRequestHeader = req.headers;
     console.log(req.headers);
     console.log(req.body);
     if (verify_request(header.timestamp ?? '', header.sign ?? '')) {
-        const dingRes: IDingTalkResponse = {
-            msgtype: 'text',
-            text: {
-                content: '我收到了！'
-            },
-            at: {
-                atMobiles: [],
-                isAtAll: false
-            }
-        }
+        const dingRes: IDingTalkResponse = await switch_response(req.body);
         res.send(dingRes);
     } else {
         const dingRes: IDingTalkResponse = {
