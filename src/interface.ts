@@ -18,7 +18,7 @@ interface IDingTalkResponseMarkdown {
     at: IDingTalkResponseAt;
 }
 
-interface IDingTalkResponseMarkdownContent {
+export interface IDingTalkResponseMarkdownContent {
     title: string;
     text: string;
 }

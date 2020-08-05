@@ -1,5 +1,5 @@
 import Express, { json } from 'express';
-import { IDingTalkResponse, IConfig, IDingTalkRequestHeader } from './interface';
+import { IDingTalkResponse, IConfig, IDingTalkRequestHeader, IDingTalkRequestBody } from './interface';
 import { readFileSync, existsSync } from "fs";
 import { join } from "path";
 import { verify_service_factory } from './auth';
@@ -26,10 +26,11 @@ app.all('/', (req, res) => {
 app.post('/bot', async (req, res) => {
     console.log('收到消息');
     const header: IDingTalkRequestHeader = req.headers;
-    console.log(req.headers);
-    console.log(req.body);
+    // console.log(req.headers);
     if (verify_request(header.timestamp ?? '', header.sign ?? '')) {
-        const dingRes: IDingTalkResponse = await switch_response(req.body);
+        const body: IDingTalkRequestBody = req.body;
+        console.log(`${body.senderNick} 从 ${body.conversationType === '1' ? '私信' : body.conversationTitle} 发来消息 “${body.text.content}”`)
+        const dingRes: IDingTalkResponse = await switch_response(body);
         res.send(dingRes);
     } else {
         const dingRes: IDingTalkResponse = {

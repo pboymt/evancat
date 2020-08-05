@@ -1,7 +1,14 @@
 import { IDingTalkResponse } from "../interface";
 import { get_canlendar } from "../modules/news/calendar";
 import moment from "moment";
+import { register_help } from "../modules/help";
 
+
+register_help(
+    '日程表',
+    ['日程表', '近期活动'].join('|'),
+    '获取近期游戏日程'
+)
 export async function response_calendar(): Promise<IDingTalkResponse> {
     const calendar = await get_canlendar();
     let content = '获取失败';
@@ -67,6 +74,11 @@ export async function response_calendar(): Promise<IDingTalkResponse> {
     }
 }
 
+register_help(
+    '今日日程',
+    ['今天', '今日', '今天日程', '今日日程', '今天活动', '今日活动', '活动'].join('|'),
+    '获取今日日程'
+)
 export async function response_today_event(): Promise<IDingTalkResponse> {
     const calendar = await get_canlendar();
     let content = '获取失败';
@@ -112,6 +124,11 @@ export async function response_today_event(): Promise<IDingTalkResponse> {
     }
 }
 
+register_help(
+    '明日日程',
+    ['明天', '明日', '明天日程', '明日日程', '明天活动', '明日活动'].join('|'),
+    '获取明日日程'
+)
 export async function response_tomorrow_event(): Promise<IDingTalkResponse> {
     const calendar = await get_canlendar();
     let content = '获取失败';
