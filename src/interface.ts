@@ -29,11 +29,13 @@ interface IDingTalkResponseAt {
 }
 
 export interface IConfig {
+    development: boolean;
     agent_id: string;
     app_key: string;
     app_secret: string;
     webhook: string;
     access_token: string;
+    start_notice: boolean;
 }
 
 export interface IDingTalkRequestHeader extends IncomingHttpHeaders {
