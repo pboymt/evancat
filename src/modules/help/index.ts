@@ -21,8 +21,8 @@ export function register_help(name: string, usage: string, description: string) 
 export function get_command_list() {
     let help = '';
     help += helps.map(h => {
-        return `**${h.name}** ${h.description}\n\n`;
-    });
+        return `**${h.name}** ${h.description}\n`;
+    }).join('\n');
     return help;
 }
 
@@ -32,7 +32,7 @@ export function get_command_help(command: string): IDingTalkResponseMarkdownCont
     if (command_help) {
         return {
             title: `${command_help.name} 帮助`,
-            text: `**功能：**${command_help.description}\n\n**用法：** ${command_help.usage}`
+            text: `**功能：** ${command_help.description}\n\n**用法：** ${command_help.usage}`
         };
     } else {
         return null;
