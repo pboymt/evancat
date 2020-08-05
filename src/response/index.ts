@@ -1,5 +1,5 @@
 import { IDingTalkRequestBody, IDingTalkResponse } from "../interface";
-import { response_calendar, response_today_event } from "./calendar";
+import { response_calendar, response_today_event, response_tomorrow_event } from "./calendar";
 
 export async function switch_response(msg: IDingTalkRequestBody): Promise<IDingTalkResponse> {
     const msg_text = msg.text.content.trim();
@@ -10,7 +10,7 @@ export async function switch_response(msg: IDingTalkRequestBody): Promise<IDingT
     } else if (['今天', '今日', '今天日程', '今日日程', '今天活动', '今日活动', '活动'].includes(msg_text)) {
         return await response_today_event();
     } else if (['明天', '明日', '明天日程', '明日日程', '明天活动', '明日活动'].includes(msg_text)) {
-        return await response_today_event();
+        return await response_tomorrow_event();
     }
     else {
         return empty_response('你在说啥？');
