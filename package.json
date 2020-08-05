@@ -1,7 +1,7 @@
 {
   "name": "evancat",
   "version": "0.0.1",
-  "main": "index.js",
+  "main": "lib/index.js",
   "repository": "https://github.com/pboymt/evancat.git",
   "author": "Robert Lee <pboymt@foxmail.com>",
   "license": "MIT",
