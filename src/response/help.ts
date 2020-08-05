@@ -16,8 +16,9 @@ export function response_help(args: string[]): IDingTalkResponse {
             }
         };
     } else if (args.length > 1) {
-        let command = args[2];
+        let command = args[1];
         let command_help = get_command_help(command);
+        console.log(command_help);
         if (command_help) {
             return {
                 msgtype: 'markdown',
@@ -31,7 +32,7 @@ export function response_help(args: string[]): IDingTalkResponse {
             return {
                 msgtype: 'text',
                 text: {
-                    content: '不存在这个指令！'
+                    content: `不存在指令 "${command}"`
                 },
                 at: {
                     atMobiles: [],

@@ -14,6 +14,7 @@ export function register_help(name: string, usage: string, description: string) 
             usage,
             description
         });
+        console.log(`注册帮助 "${name}"`);
     }
 }
 
@@ -31,7 +32,7 @@ export function get_command_help(command: string): IDingTalkResponseMarkdownCont
     if (command_help) {
         return {
             title: `${command_help.name} 帮助`,
-            text: `**功能：${command_help.description}**\n\n**用法：** ${command_help.usage}`
+            text: `**功能：**${command_help.description}\n\n**用法：** ${command_help.usage}`
         };
     } else {
         return null;
