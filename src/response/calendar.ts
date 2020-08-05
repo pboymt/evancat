@@ -1,14 +1,20 @@
 import { IDingTalkResponse } from "../interface";
 import { get_canlendar } from "../modules/news/calendar";
+import moment from "moment";
 
 export async function response_calendar(): Promise<IDingTalkResponse> {
     const calendar = await get_canlendar();
     let content = '获取失败';
     if (calendar) {
         content = '';
-        const today = new Date();
+        const today = moment().utcOffset(480).hours(4);
+        const now = moment().utcOffset(480);
+        if (now.isBefore(today, 'hour')) { // 判断是否到4点
+            now.subtract(1, "day");
+            content += '现在还未到下一个PCR日期\n\n';
+        }
         try {
-            const today_events = calendar[today.getFullYear()][today.getMonth() + 1][today.getDate()];
+            const today_events = calendar[now.year()][now.month() + 1][now.date()];
             content += `今日\n`;
             if (today_events.qdhd.length) {
                 content += `庆典活动：\n${today_events.qdhd}\n`;
@@ -29,9 +35,9 @@ export async function response_calendar(): Promise<IDingTalkResponse> {
 
         }
         for (let index = 0; index < 6; index++) {
-            today.setTime(today.getTime() + 86400000);
-            const today_events = calendar[today.getFullYear()][today.getMonth() + 1][today.getDate()];
-            content += `${today.getFullYear()}-${(today.getMonth() + 1).toString().padStart(2, '0')}-${today.getDate().toString().padStart(2, '0')}\n`;
+            now.add(1, 'day');
+            const today_events = calendar[now.year()][now.month() + 1][now.date()];
+            content += `${now.format('YYYY-MM-DD')}\n`;
             if (today_events.qdhd.length) {
                 content += `庆典活动：\n${today_events.qdhd}\n`;
             }
