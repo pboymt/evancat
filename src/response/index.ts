@@ -7,7 +7,7 @@ export async function switch_response(msg: IDingTalkRequestBody): Promise<IDingT
     const args = msg_text.split(' ');
     if (args[0] === '') {
         return empty_response('你倒是说句话啊！');
-    } else if (['帮助', 'help']) {
+    } else if (/^(帮助|help)/.test(args[0])) {
         return response_help(args);
     } else if (['日程表', '近期活动'].includes(args[0])) {
         return await response_calendar();
