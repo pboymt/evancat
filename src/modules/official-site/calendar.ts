@@ -1,4 +1,5 @@
 import axios from "axios";
+import { html2md } from "./html2markdown";
 
 interface IEventDay {
     qdhd: string; // 庆典活动
@@ -34,9 +35,10 @@ interface IEventCalendarType {
 const event_regexp = /<div class='cl-t'>(?<name>.+)<\/div><div class='cl-d'>(?<date>.+)<\/div>/g;
 
 function parse_event(str: string): string {
-    const result = str
-        .replace(/<div class='cl-t'>([^<>]+)<\/div>/g, '$1\n')
-        .replace(/<div class='cl-d'>([^<>]+)<\/div>/g, '$1\n');
+    // const result = str
+    //     .replace(/<div class='cl-t'>([^<>]+)<\/div>/g, '$1\n')
+    //     .replace(/<div class='cl-d'>([^<>]+)<\/div>/g, '$1\n');
+    const result = html2md(str);
     return result;
 }
 
