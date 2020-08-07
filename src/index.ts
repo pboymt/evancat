@@ -30,6 +30,8 @@ app.post('/bot', async (req, res) => {
         const body: IDingTalkRequestBody = req.body;
         console.log(`${body.senderNick} 从 ${body.conversationType === '1' ? '私信' : body.conversationTitle} 发来消息 “${body.text.content}”`)
         const dingRes: IDingTalkResponse = await switch_response(body);
+        console.log('回复');
+        console.log(dingRes);
         res.send(dingRes);
     } else {
         const dingRes: IDingTalkResponse = {
