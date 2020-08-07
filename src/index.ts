@@ -7,6 +7,8 @@ import { config, init_config } from './config';
 import { IDingTalkRequestBody, IDingTalkRequestHeader, IDingTalkResponse } from './interfaces';
 import { switch_response } from './response';
 
+Axios.defaults.timeout = 6000;
+
 init_config(join(__dirname, '../config.json'));
 
 const verify_request = verify_service_factory(config.app_secret);
