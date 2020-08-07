@@ -43,7 +43,9 @@ function parse_event(str: string): string {
 }
 
 export async function get_canlendar() {
+    console.log('获取日历');
     const response = await axios.get<string>(`https://static.biligame.com/pcr/gw/calendar.js?ct=${Date.now()}`);
+    console.log('成功获取日历');
     if (response.status == 200) {
         const body = response.data;
         const sandbox = Function(`let window = {}; \n${body} return window.__calendar;`);
@@ -88,8 +90,10 @@ export async function get_canlendar() {
                 }
             }
         }
+        console.log(calendar);
         return calendar;
     } else {
+        console.log('什么都没获取到');
         return null;
     }
 }
