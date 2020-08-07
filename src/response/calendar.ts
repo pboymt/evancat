@@ -1,5 +1,5 @@
-import { IDingTalkResponse } from "../interface";
-import { get_canlendar } from "../modules/news/calendar";
+import { IDingTalkResponse } from "../interfaces";
+import { get_canlendar } from "../modules/official-site/calendar";
 import moment from "moment";
 import { register_help } from "../modules/help";
 

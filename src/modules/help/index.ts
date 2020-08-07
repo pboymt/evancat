@@ -1,4 +1,4 @@
-import { IDingTalkResponseMarkdownContent } from "../../interface";
+import { IDingTalkResponseMarkdownContent } from "../../interfaces";
 
 interface IHelp {
     usage: string;

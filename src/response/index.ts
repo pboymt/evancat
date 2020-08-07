@@ -1,6 +1,7 @@
-import { IDingTalkRequestBody, IDingTalkResponse } from "../interface";
+import { IDingTalkRequestBody, IDingTalkResponse } from "../interfaces";
 import { response_calendar, response_today_event, response_tomorrow_event } from "./calendar";
 import { response_help } from "./help";
+import { response_latest_news, response_news_list } from "./news";
 
 export async function switch_response(msg: IDingTalkRequestBody): Promise<IDingTalkResponse> {
     const msg_text = msg.text.content.trim().replace(/\s{2,}/, ' ');
@@ -15,6 +16,10 @@ export async function switch_response(msg: IDingTalkRequestBody): Promise<IDingT
         return await response_today_event();
     } else if (['明天', '明日', '明天日程', '明日日程', '明天活动', '明日活动'].includes(args[0])) {
         return await response_tomorrow_event();
+    } else if (['新闻', '最新新闻'].includes(args[0])) {
+        return await response_latest_news(args);
+    } else if (['新闻列表'].includes(args[0])) {
+        return await response_news_list(args);
     }
     else {
         return empty_response('你在说啥？');

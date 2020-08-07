@@ -1,4 +1,4 @@
-import { IDingTalkResponse } from "../interface";
+import { IDingTalkResponse } from "../interfaces";
 import { get_command_list, get_command_help, register_help } from "../modules/help";
 
 register_help('帮助', '帮助 [指令名称]', '获取指令列表或者获取单独指令用法，但是你为什么在套娃？')
@@ -18,7 +18,7 @@ export function response_help(args: string[]): IDingTalkResponse {
     } else if (args.length > 1) {
         let command = args[1];
         let command_help = get_command_help(command);
-        console.log(command_help);
+        // console.log(command_help);
         if (command_help) {
             return {
                 msgtype: 'markdown',
