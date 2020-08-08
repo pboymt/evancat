@@ -49,6 +49,38 @@ app.post('/bot', async (req, res) => {
 
 });
 
+app.post('/webhook', async (req, res) => {
+    const header: IDingTalkRequestHeader = req.headers;
+    if (config.development || verify_request(header.timestamp ?? '', header.sign ?? '')) {
+        const body: IDingTalkRequestBody = req.body;
+        console.log(`${body.senderNick} 从 ${body.conversationType === '1' ? '私信' : body.conversationTitle} 发来消息 “${body.text.content}”`);
+        res.send('Ok.');
+        const dingRes: IDingTalkResponse = await switch_response(body);
+        console.log('回复');
+        console.log(dingRes);
+
+        const webhook_url = new URL(body.sessionWebhook);
+        const sign = webhook_sign();
+        webhook_url.searchParams.append('timestamp', sign.timestamp.toString());
+        webhook_url.searchParams.append('sign', sign.sign);
+
+        const result = await Axios.post(webhook_url.toString(), dingRes);
+        console.log(result.statusText);
+    } else {
+        const dingRes: IDingTalkResponse = {
+            msgtype: 'text',
+            text: {
+                content: '非法请求！'
+            },
+            at: {
+                atMobiles: [],
+                isAtAll: false
+            }
+        }
+        res.send(dingRes);
+    }
+});
+
 app.use('/static', Express.static(join(__dirname, '../statics')));
 
 app.listen(3720, () => {
