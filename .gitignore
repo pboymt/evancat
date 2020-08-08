@@ -105,5 +105,5 @@ dist
 
 # Custom
 lib/
-config.json
+config.json*
 test*
